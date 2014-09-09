@@ -1,0 +1,26 @@
+.slider {
+    -webkit-appearance: none;
+    width: 280px;
+    height: 46px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    border: 1px solid #525252;
+    background-image: -webkit-gradient(
+            linear,
+            left center,
+            right center,
+            from(red),
+            to(green)
+    );
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    top: 0;
+    z-index: 1;
+    width: 7px;
+    height: 30px;
+    cursor: pointer;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+}

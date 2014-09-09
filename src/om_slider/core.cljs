@@ -14,7 +14,6 @@
 
 (defn handle-slider-change [e owner state]
   (let [value (.. e -target -value)]
-    (print value)
     (om/set-state! owner :value value)))
 
 (defn slider [app owner]
@@ -30,7 +29,8 @@
       (dom/div nil
       (dom/input #js {:type "range" :min -100 :max 100 :step 0.1 :value (:value state)
                       :onInput #(handle-slider-change % owner state)
-                      :onChange #(handle-slider-change % owner state)} nil)
+                      :onChange #(handle-slider-change % owner state)
+                      :className "slider"} nil)
 
       (dom/span nil (:value state))))
 
