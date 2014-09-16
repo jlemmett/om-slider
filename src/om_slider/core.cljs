@@ -10,33 +10,29 @@
 
 (def app-state
   (atom
-   {:sliders [{:value 0}
+   {:sliders
+    [
+    {:value 0}
     {:value -25}
-    {:value 50}]
-    }))
+    {:value 50}
+     ]}))
 
-(defn handle-slider-change [e owner state]
+(defn handle-slider-change [e slider owner]
   (let [value (.. e -target -value)]
-
-    (om/set-state! owner :value value)))
+    (om/transact! slider :value (fn [_] value))))
 
 (defn slider [slider owner]
 
   (reify
-
     om/IRenderState
     (render-state [this state]
                   (dom/li nil
                           (dom/input #js {:type "range" :min -100 :max 100 :step 0.1 :value (:value slider)
-                                          :onInput #(handle-slider-change % owner slider)
-                                          :onChange #(handle-slider-change % owner slider)
+                                          :onInput #(handle-slider-change % slider owner)
+                                          :onChange #(handle-slider-change % slider owner)
                                           :className "slider"} nil)
 
-                          (dom/span nil (:value slider))))
-
-
-    )
-  )
+                          (dom/span nil (:value slider))))))
 
 
 (defn sliders-view [app owner]
