@@ -45,11 +45,23 @@
                            (apply dom/ul nil
                                   (om/build-all slider (:sliders app)))))))
 
+(defn state-view [app owner]
+  (reify
+    om/IRenderState
+    (render-state [this state]
+                  (dom/div nil
+                           (dom/pre nil (pr-str (:sliders app)))))))
+
 
 (om/root
   sliders-view
   app-state
   {:target (. js/document (getElementById "slider"))})
 
+(om/root
+  state-view
+  app-state
+  {:target (. js/document (getElementById "state"))})
 
-(print @app-state)
+
+
