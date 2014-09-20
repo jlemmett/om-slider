@@ -3,6 +3,9 @@ om-slider
 
 Trying to create a slider component for Om
 
+(currently more like trying to wrap existing JS slider components with Om)
+
+
 Usage
 -----
 
