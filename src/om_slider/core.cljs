@@ -4,7 +4,10 @@
             [om.dom :as dom :include-macros true]
             [cljs.core.async :refer [put! chan <!]]
             [clojure.data :as data]
-            [clojure.string :as string]))
+            [clojure.string :as string])
+
+  (:use [jayq.core :only [$ css html]])
+  )
 
 (enable-console-print!)
 
@@ -16,6 +19,7 @@
     {:value -25}
     {:value 50}
      ]}))
+
 
 (defn handle-slider-change [e slider owner]
   (let [value (.. e -target -value)]
@@ -62,6 +66,13 @@
   state-view
   app-state
   {:target (. js/document (getElementById "state"))})
+
+
+(def $nouislider ($ :#nouislider))
+(.noUiSlider $nouislider #js {:start [20, 80] :range #js {:min #js [0] :max #js [100]}})
+
+
+
 
 
 
