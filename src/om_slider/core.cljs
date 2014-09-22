@@ -4,10 +4,11 @@
             [om.dom :as dom :include-macros true]
             [cljs.core.async :refer [put! chan <!]]
             [clojure.data :as data]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [om-tools.core :refer-macros [defcomponent]]
+            )
 
-  (:use [jayq.core :only [$ css html]])
-  )
+  (:use [jayq.core :only [$ css html]]))
 
 (enable-console-print!)
 
@@ -25,10 +26,10 @@
   (let [value (.. e -target -value)]
     (om/transact! slider :value (fn [_] value))))
 
-(defn slider [slider owner]
 
-  (reify
-    om/IRenderState
+
+(defcomponent slider [slider owner]
+
     (render-state [this state]
                   (dom/li nil
                           (dom/input #js {:type "range" :min -100 :max 100 :step 0.1 :value (:value slider)
@@ -36,25 +37,20 @@
                                           :onChange #(handle-slider-change % slider owner)
                                           :className "slider"} nil)
 
-                          (dom/span nil (:value slider))))))
+                          (dom/span nil (:value slider)))))
 
 
-(defn sliders-view [app owner]
-  (reify
+(defcomponent sliders-view [app owner]
+  (render-state [this state]
+                (dom/div nil
+                         (dom/h2 nil "Sliders")
+                         (apply dom/ul nil
+                                (om/build-all slider (:sliders app))))))
 
-    om/IRenderState
+(defcomponent state-view [app owner]
     (render-state [this state]
                   (dom/div nil
-                           (dom/h2 nil "Sliders")
-                           (apply dom/ul nil
-                                  (om/build-all slider (:sliders app)))))))
-
-(defn state-view [app owner]
-  (reify
-    om/IRenderState
-    (render-state [this state]
-                  (dom/div nil
-                           (dom/pre nil (pr-str (:sliders app)))))))
+                           (dom/pre nil (pr-str (:sliders app))))))
 
 
 (om/root
