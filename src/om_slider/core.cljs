@@ -32,7 +32,9 @@
 
       (render [_]
 
-              (dom/div nil nil)
+              (dom/div #js {:style #js {:background-color "lightgreen" :width "33%"
+                                        :margin-top "25px" :margin-bottom: "25px"
+                                        :border "solid black 1px"}} nil)
 
               )
 
