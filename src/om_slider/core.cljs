@@ -17,7 +17,7 @@
    {:sliders
     [
     {:id 1 :value 0}
-    {:id 2 :value -25}
+    {:id 2 :value 75}
     {:id 3 :value 50}
      ]}))
 
@@ -31,36 +31,26 @@
 (defcomponent slider [slider owner]
 
       (render [_]
-
+              (print "render")
               (dom/div #js {:style #js {:background-color "lightgreen" :width "33%"
                                         :margin-top "25px" :margin-bottom: "25px"
-                                        :border "solid black 1px"}} nil)
-
-              )
+                                        :border "solid black 1px"}} nil))
 
       (did-mount [state]
 
-
+                (print "did mount")
                  (let [$slider-element ($ (.getDOMNode owner))
                        parameters #js {:start (:value slider)
-                                                     :range #js {"min" #js [0] "max" #js [100]}
+                                                     :range #js {"max" #js [100] "min" #js [0]}
                                                      :step 10
                                                      :format (js/wNumb #js {:mark "," :decimals 1})}]
 
 
+                   (print parameters)
+                   (.noUiSlider $slider-element parameters)
+                   (.on $slider-element #js {:slide (fn [] (print "Slide" " " (.val $slider-element)))})
 
-                   (.noUiSlider $slider-element parameters)))
-
-;;     (render-state [this state]
-;;                   (dom/li nil
-;;                           (dom/input #js {:type "range" :min -100 :max 100 :step 0.1 :value (:value slider)
-;;                                           :onInput #(handle-slider-change % slider owner)
-;;                                           :onChange #(handle-slider-change % slider owner)
-;;                                           :className "slider"} nil)
-
-;;                           (dom/span nil (:value slider))))
-
-  )
+                   )))
 
 
 (defcomponent sliders-view [app owner]
@@ -85,12 +75,3 @@
   state-view
   app-state
   {:target (. js/document (getElementById "state"))})
-
-
-
-
-
-
-
-
-

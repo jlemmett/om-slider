@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="css-ext/jquery.nouislider.pips.min.css">
     <body>
 
-        <script type='text/javascript' id='lt_ws' src='http://localhost:43891/socket.io/lighttable/ws.js'></script>
+        <script type='text/javascript' id='lt_ws' src='http://localhost:53053/socket.io/lighttable/ws.js'></script>
 
         <div id="slider"></div>
         <div id="state"></div>
@@ -21,7 +21,7 @@
 
 
         <script type="text/javascript">
-
+            /*
             var params = {
                 start: 50,
                 step: 10,
@@ -32,11 +32,14 @@
                 format: wNumb({mark: ",", decimals: 1})
             };
 
-            // console.log(params);
+            console.log(params);
 
-            // $('#slider-step').noUiSlider(params);
+                $('#slider-step').noUiSlider(params);
 
+            $('#slider-step').on({ slide: function() { console.log("Slide to " + $('#slider-step').val())}});
+            */
+        </script>
 
+    </body>
+</html>
 
-        </body>
-        </html>
