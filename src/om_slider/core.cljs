@@ -22,35 +22,34 @@
      ]}))
 
 
-(defn handle-slider-change [e slider owner]
-  (let [value (.. e -target -value)]
-    (om/transact! slider :value (fn [_] value))))
+(defn handle-slider-change [val slider owner]
+    (om/transact! slider :value (fn [_] val)))
 
 
 
 (defcomponent slider [slider owner]
 
       (render [_]
-              (print "render")
-              (dom/div #js {:style #js {:background-color "lightgreen" :width "33%"
-                                        :margin-top "25px" :margin-bottom: "25px"
+              (dom/div #js {:className "slider"
+                            :style #js {
+                                        :height "450px"
+                                        :float "left"
+                                        :margin-right "30px"
                                         :border "solid black 1px"}} nil))
 
       (did-mount [state]
-
-                (print "did mount")
                  (let [$slider-element ($ (.getDOMNode owner))
                        parameters #js {:start (:value slider)
-                                                     :range #js {"max" #js [100] "min" #js [0]}
-                                                     :step 10
-                                                     :format (js/wNumb #js {:mark "," :decimals 1})}]
+                                       :range #js {"max" #js [100] "min" #js [0]}
+                                       :step 1
+                                       :format (js/wNumb #js {:mark "," :decimals 1})
+                                       :direction "rtl"
+                                       :orientation "vertical"}]
 
 
-                   (print parameters)
                    (.noUiSlider $slider-element parameters)
-                   (.on $slider-element #js {:slide (fn [] (print "Slide" " " (.val $slider-element)))})
-
-                   )))
+                   (.css $slider-element #js {:background-color "linear-gradient(red, #f06d06)"})
+                   (.on $slider-element #js {:slide #(handle-slider-change (.val $slider-element) slider owner)}))))
 
 
 (defcomponent sliders-view [app owner]
@@ -58,7 +57,8 @@
                 (dom/div nil
                          (dom/h2 nil "Sliders")
                          (apply dom/div nil
-                                (om/build-all slider (:sliders app))))))
+                                (om/build-all slider (:sliders app)))
+                         (dom/div #js {:style #js {:clear "left"}} nil))))
 
 (defcomponent state-view [app owner]
     (render-state [this state]

@@ -14,11 +14,18 @@
   :source-paths ["src"]
 
   :cljsbuild {
-    :builds [{:id "om-slider"
-              :source-paths ["src"]
-              :compiler {
-                :output-to "om_slider.js"
-                :output-dir "out"
-                :optimizations :none
-                :externs ["lib-ext/jquery.nouislider.all.js", "lib-ext/jquery.1.11.1.min.js"]
-                :source-map true}}]})
+              :builds [{:id "om-slider"
+                        :source-paths ["src"]
+                        :compiler {
+                                   :output-to "om_slider.js"
+                                   :output-dir "out"
+                                   :optimizations :none
+                                   :source-map true
+                                   :externs ["lib-ext/react.min.js", "lib-ext/jquery.nouislider.all.js", "lib-ext/jquery.1.11.1.min.js"]
+
+
+                                   }}]})
+
+
+
+;; :source-map "om_slider.js.map"
