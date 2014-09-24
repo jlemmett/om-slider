@@ -30,12 +30,7 @@
 (defcomponent slider [slider owner]
 
       (render [_]
-              (dom/div #js {:className "slider"
-                            :style #js {
-                                        :height "450px"
-                                        :float "left"
-                                        :margin-right "30px"
-                                        :border "solid black 1px"}} nil))
+              (dom/div #js {:className "slider"} nil))
 
       (did-mount [state]
                  (let [$slider-element ($ (.getDOMNode owner))
@@ -48,7 +43,6 @@
 
 
                    (.noUiSlider $slider-element parameters)
-                   (.css $slider-element #js {:background-color "linear-gradient(red, #f06d06)"})
                    (.on $slider-element #js {:slide #(handle-slider-change (.val $slider-element) slider owner)}))))
 
 

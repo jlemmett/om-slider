@@ -21,11 +21,8 @@
                                    :output-dir "out"
                                    :optimizations :none
                                    :source-map true
-                                   :externs ["lib-ext/react.min.js", "lib-ext/jquery.nouislider.all.js", "lib-ext/jquery.1.11.1.min.js"]
-
-
-                                   }}]})
-
-
+                                   :externs ["lib-ext/react.min.js",
+                                             "lib-ext/jquery.nouislider.all.js",
+                                             "lib-ext/jquery.1.11.1.min.js"]}}]})
 
 ;; :source-map "om_slider.js.map"

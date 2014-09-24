@@ -1,18 +1,8 @@
 .slider {
-
-
-  background-image:
-    linear-gradient(#27ae60, #c0392b) !important;
-
+  background-image: linear-gradient(#27ae60, #c0392b) !important;
+  height: 450px;
+  float: left;
+  margin-right: 30px;
+  border: solid black 1px !important;
 }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    position: relative;
-    top: 0;
-    z-index: 1;
-    width: 7px;
-    height: 30px;
-    cursor: pointer;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
-}
